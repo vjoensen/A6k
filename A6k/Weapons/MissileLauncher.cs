@@ -16,7 +16,7 @@ namespace A6k.Weapons
             float muzzleOffsetX,
             float muzzleOffsetY) : base(parent, spawnPosX, spawnPosY, spawnRotation, weaponTexture, bulletTexture, muzzleOffsetX, muzzleOffsetY)
         {
-            shootCD = 50;
+            shootCD = 2;
         }
 
         public void setTarget(SpaceObject newTarget)
@@ -26,7 +26,7 @@ namespace A6k.Weapons
 
         public override void Shoot(List<SpaceObject> newObjects, double time)
         {
-            if (currentShootCD == 0)
+            if (currentShootCD <= 0)
             {
                 if (target is null || target.isDead())
                 {

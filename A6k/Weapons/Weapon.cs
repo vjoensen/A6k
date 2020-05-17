@@ -18,8 +18,8 @@ namespace A6k.Weapons
             protected SpaceObject parent;
             protected Texture2D texture;
             protected Texture2D bulletTexture;
-            protected float shootCD = 10;
-            protected float currentShootCD = 10;
+            protected float shootCD = 2;
+            protected float currentShootCD = 0;
             protected float spread;
             protected Random spreadRNG;
 
@@ -44,12 +44,13 @@ namespace A6k.Weapons
 
             public void setAttackSpeed(float atkSpeed)
             {
-                shootCD = 10 / atkSpeed;
+                shootCD = atkSpeed;
             }
 
             public virtual void Shoot(List<SpaceObject> newObjects, double time)
             {
-                if (currentShootCD == 0)
+            Console.WriteLine(currentShootCD);
+            if (currentShootCD <= 0)
                 {
                     Bullet newShot = new Bullet(parent.pos.X + (float)Math.Cos(parent.rotation + muzzleOffsetDirection) * muzzleOffsetDistance,
                            parent.pos.Y + (float)Math.Sin(parent.rotation + muzzleOffsetDirection) * muzzleOffsetDistance,
@@ -64,9 +65,10 @@ namespace A6k.Weapons
 
             public void ShootDirection(List<SpaceObject> newObjects, double time, float direction)
             {
-                if (currentShootCD == 0)
+                if (currentShootCD <= 0)
                 {
-                    Bullet newShot = new Bullet(parent.pos.X + (float)Math.Cos(parent.rotation + muzzleOffsetDirection) * muzzleOffsetDistance,
+                Console.WriteLine(currentShootCD);
+                Bullet newShot = new Bullet(parent.pos.X + (float)Math.Cos(parent.rotation + muzzleOffsetDirection) * muzzleOffsetDistance,
                            parent.pos.Y + (float)Math.Sin(parent.rotation + muzzleOffsetDirection) * muzzleOffsetDistance,
                            direction + ((float)spreadRNG.NextDouble() - .5f) * spread,
                            bulletTexture,
@@ -93,9 +95,10 @@ namespace A6k.Weapons
                 }
             }
 
-            public void Update(List<SpaceObject> newObjects)
+            public void Update(List<SpaceObject> newObjects, double time)
             {
-                if (currentShootCD > 0) currentShootCD--;
+            //Console.WriteLine(currentShootCD);
+                if (currentShootCD > 0) currentShootCD-= (float)time;
             }
 
         }

@@ -41,8 +41,8 @@ namespace A6k
             rotation = spawnRotation;
             xVel = 0;
             yVel = 0;
-            acceleration = 3;
-            maxSpeed = 10;
+            acceleration = 30;
+            maxSpeed = 4;
             texture = shipTexture;
             this.bulletTexture = bulletTexture;
             this.view = view;
@@ -75,11 +75,11 @@ namespace A6k
             
             if (Input.KeyDown(Key.A))
             {
-                xVel -= acceleration;
+                xVel -= acceleration* (float)time;
             }
             else if (Input.KeyDown(Key.D))
             {
-                xVel += acceleration;
+                xVel += acceleration * (float)time;
             }
             else
             {
@@ -89,11 +89,11 @@ namespace A6k
 
             if (Input.KeyDown(Key.W))
             {
-                yVel += acceleration;
+                yVel += acceleration * (float)time;
             }
             else if (Input.KeyDown(Key.S))
             {
-                yVel -= acceleration;
+                yVel -= acceleration * (float)time;
             }
             else
             {
@@ -124,11 +124,11 @@ namespace A6k
             }
             
             weapon1.setTarget(this.target);
-            weapon1.Update(newObjects);
+            weapon1.Update(newObjects, time);
 
             foreach (Weapon wep in weapons)
             {
-                wep.Update(newObjects);
+                wep.Update(newObjects, time);
             }
 
         }

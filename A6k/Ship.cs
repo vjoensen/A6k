@@ -36,7 +36,7 @@ namespace A6k
             radius = Math.Max(shipTexture.Height, shipTexture.Width) / 2;
             faction = Faction.Team2;
             weapon = new Weapon(this, 0, 0, 0, new Texture2D(0, 0, 0), SpriteDrawer.LoadTexture("PNG\\Lasers\\laserRed01.png", true, false), 0, 0);
-            weapon.setAttackSpeed(.2f);
+            weapon.setAttackSpeed(2f);
         }
 
         override public void Update(List<SpaceObject> newObjects, double time)
@@ -59,11 +59,11 @@ namespace A6k
 
 
             }
-            weapon.Update(newObjects);
+            weapon.Update(newObjects, time);
             pos.X += xVel;
             pos.Y += yVel;
 
-            rotation += .02f;
+            rotation += .02f*(float)time;
             if (framesSinceDamage < 9999) framesSinceDamage++;
         }
 
