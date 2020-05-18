@@ -16,19 +16,21 @@ namespace A6k.Weapons
 
         private float speed = .1f;
 
-        private float maxSpeed = 8;
+        private float maxSpeed = 4;
 
         private Texture2D texture;
         private float textureScale = .5f;
-        float duration = 120;
+        float duration = 10;
         SpaceObject target;
 
         public Missile(float spawnPosX, float spawnPosY, float spawnRotation, Texture2D shipTexture, Faction fac, SpaceObject target)
         {
+            float startSpeed = 1f;
+
             pos = new Vector2(spawnPosX, spawnPosY);
             rotation = spawnRotation;
-            xVel = (float)Math.Cos(spawnRotation) * (speed + 3);
-            yVel = (float)Math.Sin(spawnRotation) * (speed + 3);
+            xVel = (float)Math.Cos(spawnRotation) * (speed + startSpeed);
+            yVel = (float)Math.Sin(spawnRotation) * (speed + startSpeed);
             texture = shipTexture;
             faction = fac;
             this.target = target;
@@ -53,11 +55,11 @@ namespace A6k.Weapons
 
                 targetVector = targetVector * speed;
 
-                velocity = velocity + targetVector;
+                velocity = velocity + targetVector*(float)time;
             }
             else
             {
-                velocity = velocity + Vector2.NormalizeFast(velocity) * speed;
+                velocity = velocity + Vector2.NormalizeFast(velocity) * speed * (float)time;
 
             }
             if (velocity.LengthSquared > maxSpeed * maxSpeed)
@@ -68,7 +70,7 @@ namespace A6k.Weapons
 
             pos.X += velocity.X;
             pos.Y += velocity.Y;
-            duration--;
+            duration-= (float)time;
             if (duration < 0) isdead = true;
             rotation = (float)Math.Atan2(velocity.Y, velocity.X);
 
@@ -87,6 +89,7 @@ namespace A6k.Weapons
             speed = newSpeed;
         }
         */
+
         public override void Collide(SpaceObject collider)
         {
             collider.TakeDamage(20, this);
