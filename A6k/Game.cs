@@ -34,7 +34,7 @@ namespace A6k
 
         public Game() : base(GameWindowSettings.Default, NativeWindowSettings.Default)
         {
-            view = new View(Vector2.Zero, new Vector2(640, 480), 1f, 0.0f);
+            view = new View(Vector2.Zero, new Vector2(640, 480), 2f, 0.0f);
             spaceObjects = new List<SpaceObject>();
             
         }
@@ -89,6 +89,8 @@ namespace A6k
         protected override void OnUpdateFrame(FrameEventArgs args)
         {
             base.OnUpdateFrame(args);
+
+
             HandleKeyboard();
 
 

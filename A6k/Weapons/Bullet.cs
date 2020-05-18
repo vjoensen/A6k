@@ -12,7 +12,7 @@ namespace A6k.Weapons
 
         private float xVel, yVel;
 
-        private float speed = 8;
+        private float speed = 80;
 
         private Texture2D texture;
         private float textureScale = .5f;
@@ -35,9 +35,9 @@ namespace A6k.Weapons
             /*
              Styring/AI
              */
-            pos.X += xVel;
-            pos.Y += yVel;
-            duration--;
+            pos.X += xVel*(float)time;
+            pos.Y += yVel * (float)time;
+            duration-=(float)time;
             if (duration < 0) isdead = true;
             //rotation = ??
 
