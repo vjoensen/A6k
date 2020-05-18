@@ -41,8 +41,8 @@ namespace A6k
             rotation = spawnRotation;
             xVel = 0;
             yVel = 0;
-            acceleration = 30;
-            maxSpeed = 4;
+            acceleration = 100;
+            maxSpeed = 8;
             texture = shipTexture;
             this.bulletTexture = bulletTexture;
             this.view = view;
@@ -76,6 +76,7 @@ namespace A6k
             if (Input.KeyDown(Key.A))
             {
                 xVel -= acceleration* (float)time;
+                
             }
             else if (Input.KeyDown(Key.D))
             {
@@ -105,7 +106,8 @@ namespace A6k
                 float speed = (float)Math.Sqrt(xVel * xVel + yVel * yVel);
                 xVel = xVel * maxSpeed / speed;
                 yVel = yVel * maxSpeed / speed;
-            }
+            } 
+            Console.WriteLine(xVel);
             pos.X += xVel;
             pos.Y += yVel;
 
@@ -139,7 +141,7 @@ namespace A6k
             {
                 wep.Draw();
             }
-            SpriteDrawer.Draw(texture, pos, Vector2.One, Color.White, new Vector2(((float)texture.Width) / 2, ((float)texture.Height) / 2), rotation - (float)Math.PI / 2);
+            SpriteDrawer.Draw(texture, pos, new Vector2(2f,2f), Color.White, new Vector2(((float)texture.Width) / 2, ((float)texture.Height) / 2), rotation - (float)Math.PI / 2);
 
         }
 
