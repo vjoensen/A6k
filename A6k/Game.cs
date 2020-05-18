@@ -36,6 +36,7 @@ namespace A6k
         {
             view = new View(Vector2.Zero, new Vector2(640, 480), 2f, 0.0f);
             spaceObjects = new List<SpaceObject>();
+            this.UpdateFrequency = 100;
             
         }
 
@@ -90,6 +91,7 @@ namespace A6k
         {
             base.OnUpdateFrame(args);
 
+            Console.WriteLine(args.Time);
 
             HandleKeyboard();
 
